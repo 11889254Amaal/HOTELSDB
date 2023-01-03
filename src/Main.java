@@ -15,7 +15,8 @@ public class Main {
 			System.out.println("6. Make first 10 hotels 'is_Active' = false ");
 			System.out.println("7. Print hotel information by user input");
 			System.out.println("8. updateById");
-			System.out.println("9. Exit from Program");
+			System.out.println("9. Delete by id");
+			System.out.println("10. Existe from System");
 			}
 		public static void main(String[] args) throws ClassNotFoundException, SQLException {
 			// TODO Auto-generated method stub
@@ -105,7 +106,14 @@ public class Main {
 					choicesFunction();
 
 					break;
+					
 				case 9:
+					CreateHotelsTable DelteByID1 = new CreateHotelsTable();
+					DelteByID1.DeleteById();
+					choicesFunction();
+
+					break;
+				case 10:
 				System.out.println("Exiting The System Bye See you Again :)!....");
 				System.exit(0);
 

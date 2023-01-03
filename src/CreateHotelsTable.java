@@ -382,4 +382,46 @@ public class CreateHotelsTable {
 		System.out.println("Please check it in the MySQL Table. Record is now updated.......");
 	}
 
+	
+	
+	public static void DeleteById() throws ClassNotFoundException {
+		Connection conn = null;
+		Statement stmt = null;
+		try {
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			System.out.println("Connection is created successfully:");
+			stmt = (Statement) conn.createStatement();
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Please Enter any id to delete hotel data :");
+	         int userinput =scanner.nextInt();
+	         
+	         Statement st = conn.createStatement();
+	         String sql="DELETE FROM Hotels  WHERE id='"+userinput+"'";
+		     int result=st.executeUpdate(sql);
+			System.out.println("Record has been deleted in the table successfully..................");
+		} catch (SQLException excep) {
+			excep.printStackTrace();
+		} catch (Exception excep) {
+			excep.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
+		}
+		
+	}
+
 }
