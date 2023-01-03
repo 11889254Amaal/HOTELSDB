@@ -6,11 +6,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 import javax.sql.DataSource;
+
+import com.mysql.cj.jdbc.Driver;
 
 import java.sql.Connection;
 
@@ -174,6 +177,9 @@ public class CreateHotelsTable {
 	}
 
 	public long ShowTop() throws ClassNotFoundException {
+		
+		
+		
 		String sqlDB = " SELECT * FROM Hotels LIMIT 10";
 
 		Class.forName("com.mysql.jdbc.Driver");
@@ -297,44 +303,46 @@ public class CreateHotelsTable {
 
 	public long ShowHostelInformation() throws ClassNotFoundException {
 
-		System.out.println("plz enter how many rows want to show");
-
-		Scanner sc = new Scanner(System.in); // System.in is a standard input stream
-		int id = sc.nextInt();
-		String sqlDB = " SELECT * FROM Hotels WHERE id<= '" + id + "'";
-
-		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
 		String username = "root";
 		String password = "root";
-		try {
-
-			Connection conn = DriverManager.getConnection(url, username, password);
-			Statement st = conn.createStatement();
-			ResultSet m = st.executeQuery(sqlDB);
-			if (m.next()) {
-				do {
-					System.out.println("id : " + m.getInt(1));
-					System.out.println("hotel_name :" + m.getString(2));
-					System.out.println("hotel_location :" + m.getString(3));
-					System.out.println("created_date :" + m.getDate(4));
-					System.out.println("updated_date :" + m.getDate(5));
-					if (m.getInt(6) == 1) {
-						System.out.println("is_Active : true");
-					} else {
-						System.out.println("is_Active : fulse");
-					}
-					System.out.println("*********************************");
-				} while (m.next());
-			} else {
-				System.out.println("No such user id is already registered");
-			}
-			conn.close();
-		} catch (Exception ex) {
-			System.err.println(ex);
-		}
-
-		return 0;
+		
+			Scanner sa=new Scanner(System.in);
+			System.out.println("Enter how many users you have to print:");
+			int user=sa.nextInt();
+			
+			
+		  
+			String sql = "SELECT * FROM hotels";
+			//Connection, Driver, DriverRegister lines will be exactly same
+			
+			
+		
+			 java.sql.Connection conn = null;
+			 try {
+					Driver driver = (Driver) Class.forName("com.mysql.jdbc.Driver").newInstance();
+					DriverManager.registerDriver(driver);
+					conn = DriverManager.getConnection(url, username, password);
+					java.sql.Statement st = conn.createStatement();
+					ResultSet resultSet = st.executeQuery(sql);
+					int count=0;
+					while(resultSet.next()&& count<user){
+						Integer id = resultSet.getInt("id");
+						String hotel_name = resultSet.getString("hotel_name");
+						String hotel_location = resultSet.getString("hotel_location");
+						Date created_date = resultSet.getDate("created_date");
+						Date updated_date = resultSet.getDate("updated_date");
+						Boolean is_Active = resultSet.getBoolean("is_Active");
+						System.out.println(id+" "+hotel_name+" "+hotel_location+" "+created_date+" "+updated_date+" "+is_Active);
+						count++;
+						 }
+				
+					conn.close();
+				}
+				catch (Exception ex) {
+					System.err.println(ex);
+				}
+			return user;
 
 	}
 
