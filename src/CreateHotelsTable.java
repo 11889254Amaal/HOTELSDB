@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import java.sql.Connection;
 
 public class CreateHotelsTable {
-	 private final DataSource dataSource = null;
+	private final DataSource dataSource = null;
 	static final String DB_URL = "jdbc:mysql://localhost:3306/HotelDBMS";
 
 	static final String USER = "root";
@@ -350,12 +350,17 @@ public class CreateHotelsTable {
 			conn = DriverManager.getConnection(DB_URL, USER, PASS);
 			System.out.println("Connection is created successfully:");
 			stmt = (Statement) conn.createStatement();
+			Scanner scanner = new Scanner(System.in);
+			System.out.println("Please Enter any id to Update hotel data :");
+	         int userinput =scanner.nextInt();
+	         System.out.println("Please Enter the new Hotel name:");
+	         String hotelname=scanner.next();
+	         System.out.println("Please Enter the new Hotel location:");
+	         String hotellocatin=scanner.next();
 	
-			
-
-//			String query1 = "update Hotels set"+
-//			hotel_name+"'Johnson',hotel_location='MUSCAT',created_date='1975-05-07',updated_date='1975-05-07',is_Active='1' " + "where id =174";
-			//stmt.executeUpdate(query1);
+	         Statement st = conn.createStatement();
+	         String sql="UPDATE Hotels SET hotel_name='"+hotelname+"',hotel_location='"+hotellocatin+"' WHERE id='"+userinput+"'";
+		     int result=st.executeUpdate(sql);
 			System.out.println("Record has been updated in the table successfully..................");
 		} catch (SQLException excep) {
 			excep.printStackTrace();
@@ -376,7 +381,5 @@ public class CreateHotelsTable {
 		}
 		System.out.println("Please check it in the MySQL Table. Record is now updated.......");
 	}
-
-	
 
 }
