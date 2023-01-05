@@ -20,7 +20,7 @@ try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
                   "employee_type_id  INTEGER  ,"+
                            "FOREIGN KEY (employee_type_id) REFERENCES Employee_Type(id) ON DELETE CASCADE ,"+
                            "room_id  INTEGER  ,"+
-                           "FOREIGN KEY (room_id ) REFERENCES Hotels(id) ON DELETE CASCADE ,"+
+                           "FOREIGN KEY (room_id ) REFERENCES Rooms(id) ON DELETE CASCADE ,"+
                   " created_date Date , " +
                   " updated_date Date not NULL, " +
                   " is_Active  Boolean  not NULL, " +

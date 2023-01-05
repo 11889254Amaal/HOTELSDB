@@ -17,7 +17,8 @@ public class Main {
 		System.out.println("8. updateById");
 		System.out.println("9. Delete by id");
 		System.out.println("10. Sub Menu");
-		System.out.println("11. Existe from System");
+		System.out.println("11. Insert to Employe Type");
+		System.out.println("12. Existe from System");
 	}
 
 	static void choicesFunctionForSubMenu() {
@@ -189,6 +190,11 @@ public class Main {
 					}
 				} while (true);
 			case 11:
+				System.out.println("Insert to Employe Type Table");
+				Employee_Type empType=new Employee_Type();
+				empType.InsertintoTableEmploye_type();
+				break;
+			case 12:
 				System.out.println("Exiting The System Bye See you Again :)!....");
 				System.exit(0);
 
