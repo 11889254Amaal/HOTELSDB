@@ -296,7 +296,7 @@ public class CreateHotelsTable {
 			stmt = (Statement) conn.createStatement();
 			
 	         Statement st = conn.createStatement();
-	         String sql="UPDATE Hotels SET is_Active = true LIMIT 10;";
+	         String sql="UPDATE Hotels SET is_Active = false LIMIT 10;";
 		     int result=st.executeUpdate(sql);
 			System.out.println("Record has been updated in the table successfully..................");
 		} catch (SQLException excep) {
