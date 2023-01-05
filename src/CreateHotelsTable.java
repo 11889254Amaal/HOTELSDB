@@ -63,7 +63,7 @@ public class CreateHotelsTable {
 
 			String hotel_location = "Muscat";
 
-			String is_Active = "true";
+			int is_Active = 1;
 			////////////////////////////////////////////
 			Random random = new Random();
 			int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
@@ -87,8 +87,8 @@ public class CreateHotelsTable {
 				System.out.println(numberToAdd);
 				// Inserting data using SQL query
 
-				String sql = "INSERT INTO Hotels VALUES(" + id1 + numberToAdd + ",'" + (hotel_name + id1) + "','"
-						+ (hotel_location + id1) + "','" + created_date + "','" + updated_date + "','" + is_Active
+				String sql = "INSERT INTO Hotels VALUES(" + id1 + numberToAdd + ",'" + (hotel_name + id1+numberToAdd) + "','"
+						+ (hotel_location + id1+numberToAdd) + "','" + created_date + "','" + updated_date + "','" + is_Active
 						+ "')";
 				Statement st = con.createStatement();
 				//
@@ -120,7 +120,7 @@ public class CreateHotelsTable {
 			System.out.println("==============================");
 
 			//////////////////////////////////////////////////////////
-			// System.in is a standard input stream
+	// System.in is a standard input stream
 			int count = 1; // reads string
 
 			int int_random = ThreadLocalRandom.current().nextInt();
@@ -144,18 +144,18 @@ public class CreateHotelsTable {
 			for (int id1 = 1; id1 <= count; id1++) {
 				// String id2=id1+" "+int_random;
 				// long id = Integer.parseInt(id2);
-				// System.out.println(id);
-				// Inserting data using SQL query
 
 				// Inserting data using SQL query
-				System.out.println(id1);
+				
 
 				Random rd = new Random();
-				System.out.println(rd);
+				
 				Integer numberToAdd = rd.nextInt(100);
-				System.out.println(numberToAdd);
-				String sql = "INSERT INTO Hotels VALUES(" + id1 + numberToAdd + ",'" + (hotel_name + id1) + "','"
-						+ (hotel_location + id1) + "','" + created_date + "','" + updated_date + "','" + is_Active
+				
+				// Inserting data using SQL query
+
+				String sql = "INSERT INTO Hotels VALUES(" + id1 + numberToAdd + ",'" + (hotel_name + id1+numberToAdd) + "','"
+						+ (hotel_location + id1+numberToAdd) + "','" + created_date + "','" + updated_date + "','" + is_Active
 						+ "')";
 				Statement st = con.createStatement();
 				//
@@ -169,6 +169,7 @@ public class CreateHotelsTable {
 				// Closing the connections
 
 			}
+
 			con.close();
 
 		}
@@ -280,24 +281,45 @@ public class CreateHotelsTable {
 
 	}
 
-	public long ChangeActive() throws ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
-		String username = "root";
-		String password = "root";
-		Connection con = null;
-		PreparedStatement ps = null;
+	public void ChangeActive() throws ClassNotFoundException {
+	
+		Connection conn = null;
+		Statement stmt = null;
 		try {
-			Connection conn = DriverManager.getConnection(url, username, password);
-			String query = "update Hotels set is_Active=0 where Id<=10 ";
-			ps = (PreparedStatement) conn.prepareStatement(query);
-
-			ps.executeUpdate();
-			System.out.println("Record is updated successfully......");
-		} catch (Exception e) {
-			e.printStackTrace();
+			try {
+				Class.forName("com.mysql.jdbc.Driver");
+			} catch (Exception e) {
+				System.out.println(e);
+			}
+			conn = DriverManager.getConnection(DB_URL, USER, PASS);
+			System.out.println("Connection is created successfully:");
+			stmt = (Statement) conn.createStatement();
+			
+	         Statement st = conn.createStatement();
+	         String sql="UPDATE Hotels SET is_Active = true LIMIT 10;";
+		     int result=st.executeUpdate(sql);
+			System.out.println("Record has been updated in the table successfully..................");
+		} catch (SQLException excep) {
+			excep.printStackTrace();
+		} catch (Exception excep) {
+			excep.printStackTrace();
+		} finally {
+			try {
+				if (stmt != null)
+					conn.close();
+			} catch (SQLException se) {
+			}
+			try {
+				if (conn != null)
+					conn.close();
+			} catch (SQLException se) {
+				se.printStackTrace();
+			}
 		}
-		return 0;
+		System.out.println("Please check it in the MySQL Table. Record is now updated.......");
+
+
+
 
 	}
 
