@@ -17,8 +17,11 @@ public class Main {
 		System.out.println("8. updateById");
 		System.out.println("9. Delete by id");
 		System.out.println("10. Sub Menu");
-		System.out.println("11. Insert to Employe Type");
-		System.out.println("12. Existe from System");
+		System.out.println("11. Insert to Employe Type Table");
+		System.out.println("12. Insert to Rooms Type Table");
+		System.out.println("13. Insert to Rooms Tables");
+		System.out.println("13. Insert to Employes Tables");
+		System.out.println("13. Existe from System");
 	}
 
 	static void choicesFunctionForSubMenu() {
@@ -193,8 +196,27 @@ public class Main {
 				System.out.println("Insert to Employe Type Table");
 				Employee_Type empType=new Employee_Type();
 				empType.InsertintoTableEmploye_type();
+				///done
 				break;
+				
 			case 12:
+				System.out.println("Insert to Rooms Type Table");
+				CreateRoom_TypeTable RoomsType=new CreateRoom_TypeTable();
+				RoomsType.InsertintoTableRooms_type();
+				//done
+				break;
+			case 13:
+				System.out.println("Insert to Rooms  Table");
+				Rooms RoomsInsert=new Rooms();
+				RoomsInsert.InsertintoTableRooms();
+				break;
+			
+			case 14:
+				System.out.println("Insert to Employe  Table");
+				Employees emp1=new Employees();
+				emp1.InsertintoTableEmploye();
+				break;
+			case 15:
 				System.out.println("Exiting The System Bye See you Again :)!....");
 				System.exit(0);
 

@@ -75,10 +75,7 @@ public class Employee_Type {
 			// Inserting data using SQL query
 			System.out.println(id1);
 
-			Random rd = new Random();
-			System.out.println(rd);
-			Integer numberToAdd = rd.nextInt(100);
-			System.out.println(numberToAdd);
+			
 			// Inserting data using SQL query
 
 			String sql = "INSERT INTO employee_type VALUES(" + id1  + ",'" + (employee_type_name[id1-1] ) + "','"
