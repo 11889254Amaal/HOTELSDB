@@ -20,8 +20,8 @@ public class Main {
 		System.out.println("11. Insert to Employe Type Table");
 		System.out.println("12. Insert to Rooms Type Table");
 		System.out.println("13. Insert to Rooms Tables");
-		System.out.println("13. Insert to Employes Tables");
-		System.out.println("13. Existe from System");
+		System.out.println("14. Insert to Employes Tables");
+		System.out.println("15. Existe from System");
 	}
 
 	static void choicesFunctionForSubMenu() {

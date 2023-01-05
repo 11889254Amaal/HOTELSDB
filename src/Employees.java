@@ -5,6 +5,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Random;
+import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
 public class Employees {
@@ -51,11 +52,7 @@ public int InsertintoTableEmploye() throws SQLException, ClassNotFoundException 
 
 		//////////////////////////////////////////////////////////
 		 // System.in is a standard input stream
-		int count = 20; // reads string
-
-	
-
-		
+		int count = 1; // reads string
 
 		int is_Active = 1;
 		////////////////////////////////////////////
@@ -71,14 +68,20 @@ public int InsertintoTableEmploye() throws SQLException, ClassNotFoundException 
 		for (int id1 = 1; id1 <= count; id1++) {
 			// String id2=id1+" "+int_random;
 			// long id = Integer.parseInt(id2);
-			String employee_type_name[]={"MANAGER", "ATTENDANT", "VALET", "BUTLER","DIRECTOR"};
+			
 			// Inserting data using SQL query
 			System.out.println(id1);
 
-			
+			Scanner sc = new Scanner(System.in);
 			// Inserting data using SQL query
-
-			String sql = "INSERT INTO employee_type VALUES(" + id1  + ",'" + (employee_type_name[id1-1] ) + "','"
+             System.out.println("plz enter employee_type_name ");
+             String sql1 ="SELECT id FROM employee_type";
+             String sql2 ="SELECT id FROM Rooms";
+             //System.out.println(sql1);
+             String employee_type_name = sc.next();
+			String sql = "INSERT INTO employee VALUES(" + id1  + ",'" + (employee_type_name) + "','"
+					+ (sql1+id1) + "','"
+					+ (sql2+id1) + "','"
 					 + created_date + "','" + updated_date + "','" + is_Active
 					+ "')";
 			Statement st = con.createStatement();
