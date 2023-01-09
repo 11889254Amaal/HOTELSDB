@@ -144,20 +144,24 @@ public class Main {
 					switch (userInput1) {
 					case 1:
 						// this class to insert to table with IDENTITY(1,1)
-
+						HotelsManagment HotelManag1=new HotelsManagment();
+						HotelManag1.GuestEndWithE();
 						choicesFunctionForSubMenu();
 						//
 						break;
 
 					case 2:
 						// this class to insert to table with IDENTITY(1,1)
-
+						HotelsManagment HotelManag2=new HotelsManagment();
+						HotelManag2.guestsPayingMoreThan1001();
+						
 						choicesFunctionForSubMenu();
 						//
 						break;
 					case 3:
 						// this class to insert to table with IDENTITY(1,1)
-
+						HotelsManagment HotelManag3=new HotelsManagment();
+						HotelManag3.guestsStartWithDeluxe();
 						choicesFunctionForSubMenu();
 						//
 						break;
@@ -171,7 +175,9 @@ public class Main {
 					
 					case 5:
 						// this class to insert to table with IDENTITY(1,1)
-
+						HotelsManagment HotelManag4=new HotelsManagment();
+						HotelManag4.guestsNotActiveWithDeluxe();
+						choicesFunctionForSubMenu();
 						choicesFunctionForSubMenu();
 						//
 					break;
