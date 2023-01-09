@@ -19,9 +19,10 @@ public class Main {
 		System.out.println("10. Sub Menu");
 		System.out.println("11. Insert to Employe Type Table");
 		System.out.println("12. Insert to Rooms Type Table");
-		System.out.println("13. Insert to Rooms Tables");
-		System.out.println("14. Insert to Employes Tables");
-		System.out.println("15. Existe from System");
+		System.out.println("13. Insert to Guest Tables");
+		System.out.println("14. Insert to Rooms Tables");
+		System.out.println("15. Insert to Employes Tables");
+		System.out.println("16. Existe from System");
 	}
 
 	static void choicesFunctionForSubMenu() {
@@ -206,17 +207,22 @@ public class Main {
 				//done
 				break;
 			case 13:
+				System.out.println("Insert to Guest  Table");
+				Guests GuestsInsert=new Guests();
+				GuestsInsert.InsertIntoTable();
+				break;
+			case 14:
 				System.out.println("Insert to Rooms  Table");
-				Rooms RoomsInsert=new Rooms();
-				RoomsInsert.InsertintoTableRooms();
+				Rooms RommInsert=new Rooms();
+				RommInsert.InsertintoTableRooms();
 				break;
 			
-			case 14:
+			case 15:
 				System.out.println("Insert to Employe  Table");
 				Employees emp1=new Employees();
 				emp1.InsertintoTableEmploye();
 				break;
-			case 15:
+			case 16:
 				System.out.println("Exiting The System Bye See you Again :)!....");
 				System.exit(0);
 

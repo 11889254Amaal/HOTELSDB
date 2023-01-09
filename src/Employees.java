@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDate;
@@ -8,100 +9,67 @@ import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 
+import com.mysql.cj.jdbc.Driver;
+
 public class Employees {
 
-static final String DB_URL = "jdbc:mysql://localhost:3306/HotelDBMS";
-  static final String USER = "root";
-  static final String PASS = "root";
+	static final String DB_URL = "jdbc:mysql://localhost:3306/HotelDBMS";
+	static final String USER = "root";
+	static final String PASS = "root";
 
-public boolean CreateTableToDB () {
-try(Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
-        Statement stmt = conn.createStatement();
-     ) {      
-         String sql = "CREATE TABLE employee " +
-                  "(id INTEGER not NULL, " +
-                  " employee_type_name    VARCHAR(100) not NULL, " +
-                  "employee_type_id  INTEGER  ,"+
-                           "FOREIGN KEY (employee_type_id) REFERENCES Employee_Type(id) ON DELETE CASCADE ,"+
-                           "room_id  INTEGER  ,"+
-                           "FOREIGN KEY (room_id ) REFERENCES Rooms(id) ON DELETE CASCADE ,"+
-                  " created_date Date , " +
-                  " updated_date Date not NULL, " +
-                  " is_Active  Boolean  not NULL, " +
-                  " PRIMARY KEY ( id ))";
+	public boolean CreateTableToDB() {
+		try (Connection conn = DriverManager.getConnection(DB_URL, USER, PASS);
+				Statement stmt = conn.createStatement();) {
+			String sql = "CREATE TABLE employee " + "(id INTEGER not NULL, "
+					+ " employee_type_name    VARCHAR(100) not NULL, " + "employee_type_id  INTEGER  ,"
+					+ "FOREIGN KEY (employee_type_id) REFERENCES Employee_Type(id) ON DELETE CASCADE ,"
+					+ "room_id  INTEGER  ," + "FOREIGN KEY (room_id ) REFERENCES Rooms(id) ON DELETE CASCADE ,"
+					+ " created_date Date , " + " updated_date Date not NULL, " + " is_Active  Boolean  not NULL, "
+					+ " PRIMARY KEY ( id ))";
 
-        stmt.executeUpdate(sql);
-       
-        System.out.println(true+"===>Created Employe Type Table table in given database...");  
-       
-     } catch (SQLException e) {
-       System.out.println("Table Employe Type Table Already Build");
-       System.out.println("***********************************");
-     }
-return false;
-  }
+			stmt.executeUpdate(sql);
 
-public int InsertintoTableEmploye() throws SQLException, ClassNotFoundException {
-	Class.forName("com.mysql.jdbc.Driver");
-	String url = "jdbc:mysql://localhost:3306/HotelDBMS";
-	String username = "root";
-	String password = "root";
-	Connection con = DriverManager.getConnection(url, username, password);
-	if (con != null) {
-		System.out.println("==============================");
+			System.out.println(true + "===>Created Employe Type Table table in given database...");
 
-		//////////////////////////////////////////////////////////
-		 // System.in is a standard input stream
-		int count = 1; // reads string
+		} catch (SQLException e) {
+			System.out.println("Table Employe Type Table Already Build");
+			System.out.println("***********************************");
+		}
+		return false;
+	}
 
-		int is_Active = 1;
-		////////////////////////////////////////////
-		Random random = new Random();
-		int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
-		int maxDay = (int) LocalDate.of(2015, 1, 1).toEpochDay();
-		long randomDay = minDay + random.nextInt(maxDay - minDay);
-		LocalDate created_date = LocalDate.ofEpochDay(randomDay);
-		LocalDate updated_date = LocalDate.ofEpochDay(randomDay);
-		////////////////////////////////////////////////////
+	public int InsertintoTableEmploye() {
+		String sql = "INSERT INTO employee (id,employee_type_name,employee_type_id,room_id,created_date,updated_date,is_Active) \r\n"
+				+ "VALUES (201,'VALET',2,401,'2022-01-01', '2022-01-01', 1),\r\n"
+				+ "       (301,'VALET',2,401,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "      (401,'VALET', 1,401,'2022-03-03', '2022-03-03', 1),\r\n"
+				+ "       (501,'VALET', 3,401,'2022-04-04', '2022-04-04', 1),\r\n"
+				+ "      (601,'VALET', 3,401,'2022-05-05', '2022-05-05', 1),\r\n"
+				+ "       (701,'BUTLER', 4,401,'2022-02-06', '2022-02-06', 1),\r\n"
+				+ "      (801,'BUTLER',4,401,'2022-03-07', '2022-03-07', 1),\r\n"
+				+ "      (901,'BUTLER', 4,401,'2022-04-08', '2022-04-08', 1)\r\n";
+		Connection con = null;
 
-		///////////////////////////////////////////
-		for (int id1 = 1; id1 <= count; id1++) {
-			// String id2=id1+" "+int_random;
-			// long id = Integer.parseInt(id2);
-			
-			// Inserting data using SQL query
-			System.out.println(id1);
-
-			Scanner sc = new Scanner(System.in);
-			// Inserting data using SQL query
-             System.out.println("plz enter employee_type_name ");
-             String sql1 ="SELECT id FROM employee_type";
-             String sql2 ="SELECT id FROM Rooms";
-             //System.out.println(sql1);
-             String employee_type_name = sc.next();
-			String sql = "INSERT INTO employee VALUES(" + id1  + ",'" + (employee_type_name) + "','"
-					+ (sql1+id1) + "','"
-					+ (sql2+id1) + "','"
-					 + created_date + "','" + updated_date + "','" + is_Active
-					+ "')";
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			// Registering drivers
+			DriverManager.registerDriver(driver);
+			// Reference to connection interface
+			con = DriverManager.getConnection(DB_URL, USER, PASS);
 			Statement st = con.createStatement();
-			//
 			// Executing query
-			int m = st.executeUpdate(sql);
-			if (m >= 1)
-				System.out.println("inserted successfully : " + sql);
+			int n = st.executeUpdate(sql);
+			if (n >1)
+				System.out.println("Inserted successfully : " + sql);
 			else
-				System.out.println("insertion failed");
-
+				System.out.println("Inserting failed");
 			// Closing the connections
-
+			con.close();
+		}
+		catch (Exception ex) {
+			System.err.println(ex);
 		}
 
-		con.close();
-	}
-	return 0;
-	}
-
-
-
+		return 0;
+}
 }

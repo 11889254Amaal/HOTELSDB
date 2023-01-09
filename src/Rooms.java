@@ -6,6 +6,8 @@ import java.sql.Statement;
 import java.time.LocalDate;
 import java.util.Random;
 
+import com.mysql.cj.jdbc.Driver;
+
 public class Rooms {
 
 	static final String DB_URL = "jdbc:mysql://localhost:3306/HotelDBMS";
@@ -33,64 +35,39 @@ public class Rooms {
 		return false;
 	}
 	
-	public int InsertintoTableRooms() throws SQLException, ClassNotFoundException {
-		Class.forName("com.mysql.jdbc.Driver");
-		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
-		String username = "root";
-		String password = "root";
-		Connection con = DriverManager.getConnection(url, username, password);
-		if (con != null) {
-			System.out.println("==============================");
-
-			//////////////////////////////////////////////////////////
-			 // System.in is a standard input stream
-			int count = 20; // reads string
-
+	public int InsertintoTableRooms()  {
 		
+		String sql = "INSERT INTO Rooms (id,room_type_id ,hotel_id,created_date,updated_date,is_Active) \r\n"
+				+ "VALUES (101, 1,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "       (201, 2,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "      (301, 2,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "       (401, 3,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "      (501, 3,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "       (601, 2,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "      (701, 3,79,'2022-02-02', '2022-02-02', 1),\r\n"
+				+ "      (801, 1,79,'2022-02-02', '2022-02-02', 1)\r\n";
+		Connection con = null;
 
-			
-
-			int is_Active = 1;
-			////////////////////////////////////////////
-			Random random = new Random();
-			int minDay = (int) LocalDate.of(1900, 1, 1).toEpochDay();
-			int maxDay = (int) LocalDate.of(2015, 1, 1).toEpochDay();
-			long randomDay = minDay + random.nextInt(maxDay - minDay);
-			LocalDate created_date = LocalDate.ofEpochDay(randomDay);
-			LocalDate updated_date = LocalDate.ofEpochDay(randomDay);
-			////////////////////////////////////////////////////
-
-			///////////////////////////////////////////
-			for (int id1 = 1; id1 <= count; id1++) {
-				// String id2=id1+" "+int_random;
-				// long id = Integer.parseInt(id2);
-				String employee_type_name[]={"MANAGER", "ATTENDANT", "VALET", "BUTLER","DIRECTOR"};
-				// Inserting data using SQL query
-				System.out.println(id1);
-
-				
-				// Inserting data using SQL query
-
-				String sql = "INSERT INTO employee_type VALUES(" + id1  + ",'" + (employee_type_name[id1-1] ) + "','"
-						 + created_date + "','" + updated_date + "','" + is_Active
-						+ "')";
-				Statement st = con.createStatement();
-				//
-				// Executing query
-				int m = st.executeUpdate(sql);
-				if (m >= 1)
-					System.out.println("inserted successfully : " + sql);
-				else
-					System.out.println("insertion failed");
-
-				// Closing the connections
-
-			}
-
+		try {
+			Driver driver = (Driver) Class.forName("com.mysql.cj.jdbc.Driver").newInstance();
+			// Registering drivers
+			DriverManager.registerDriver(driver);
+			// Reference to connection interface
+			con = DriverManager.getConnection(DB_URL, USER, PASS);
+			Statement st = con.createStatement();
+			// Executing query
+			int n = st.executeUpdate(sql);
+			if (n >1)
+				System.out.println("Inserted successfully : " + sql);
+			else
+				System.out.println("Inserting failed");
+			// Closing the connections
 			con.close();
 		}
-		return 0;
+		catch (Exception ex) {
+			System.err.println(ex);
 		}
+		return 0;}
 
 
 }
