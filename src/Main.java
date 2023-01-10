@@ -168,7 +168,9 @@ public class Main {
 						
 					case 4:
 						// this class to insert to table with IDENTITY(1,1)
-
+						HotelsManagment HotelManag6=new HotelsManagment();
+						HotelManag6.GuestStaingInRooms();
+						
 						choicesFunctionForSubMenu();
 						//
 					break;
@@ -178,13 +180,14 @@ public class Main {
 						HotelsManagment HotelManag4=new HotelsManagment();
 						HotelManag4.guestsNotActiveWithDeluxe();
 						choicesFunctionForSubMenu();
-						choicesFunctionForSubMenu();
+						
 						//
 					break;
 					
 					case 6:
 						// this class to insert to table with IDENTITY(1,1)
-
+						HotelsManagment HotelManag5=new HotelsManagment();
+						HotelManag5.hotelswhnamehavEH();
 						choicesFunctionForSubMenu();
 						//
 					break;
@@ -196,7 +199,7 @@ public class Main {
 						System.exit(0);
 						//
 					break;
-					
+					//or hotels.is_Active=1
 					}
 				} while (true);
 			case 11:
