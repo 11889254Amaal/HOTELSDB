@@ -41,7 +41,7 @@ public class CreateHotelsTable {
 		}
 		return false;
 	}
-
+	
 	public long insertIntoTable() throws ClassNotFoundException, SQLException {
 		Class.forName("com.mysql.jdbc.Driver");
 		String url = "jdbc:mysql://localhost:3306/HotelDBMS";
@@ -72,17 +72,17 @@ public class CreateHotelsTable {
 			LocalDate created_date = LocalDate.ofEpochDay(randomDay);
 			LocalDate updated_date = LocalDate.ofEpochDay(randomDay);
 			////////////////////////////////////////////////////
-
+			 int id1=1;
 			///////////////////////////////////////////
-			for (int id1 = 1; id1 <= count; id1++) {
+			for (int id2 = 1; id2 <= count; id2++) {
 				// String id2=id1+" "+int_random;
 				// long id = Integer.parseInt(id2);
-
+                
 				// Inserting data using SQL query
-				System.out.println(id1);
-
+			
+               
 				Random rd = new Random();
-				System.out.println(rd);
+				
 				Integer numberToAdd = rd.nextInt(100);
 				System.out.println(numberToAdd);
 				// Inserting data using SQL query
@@ -94,13 +94,17 @@ public class CreateHotelsTable {
 				//
 				// Executing query
 				int m = st.executeUpdate(sql);
-				if (m >= 1)
+				if (m >= 1) {
 					System.out.println("inserted successfully : " + sql);
+					
+				}
 				else
+				{
 					System.out.println("insertion failed");
 
 				// Closing the connections
-
+				}
+				id1++;
 			}
 
 			con.close();
@@ -147,7 +151,7 @@ public class CreateHotelsTable {
 
 				// Inserting data using SQL query
 				
-
+                
 				Random rd = new Random();
 				
 				Integer numberToAdd = rd.nextInt(100);
